@@ -1,0 +1,39 @@
+{
+  "name": "fitterr",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/next-js": "^2.1.5",
+    "@chakra-ui/react": "^2.8.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@firebase/firestore": "^4.2.0",
+    "@types/react-router-dom": "^5.3.3",
+    "encoding": "^0.1.13",
+    "firebase": "^10.4.0",
+    "firestore": "^1.1.6",
+    "framer-motion": "^10.16.4",
+    "immer": "^10.0.3",
+    "next": "13.5.4",
+    "react": "^18",
+    "react-datepicker": "^4.21.0",
+    "react-dom": "^18",
+    "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "typescript": "^5"
+  }
+}
