@@ -22,13 +22,9 @@ import {CgGym} from 'react-icons/cg'
 import {FcGoogle} from "react-icons/fc"
 import { useAuth } from '@/app/context/AuthContext'
 import React, { useState, useEffect } from "react";
-import { Link } from '@chakra-ui/next-js'
 
-interface Props {
-  children: React.ReactNode
-}
 
-const NavLink = (props: Props) => {
+const NavLink = (props) => {
   const { children } = props
 
   return (
@@ -66,6 +62,14 @@ export default function Navbar() {
     try {
       window.location.href = "/"
       await logOut()
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  const handleToProfile = () => {
+    try {
+      window.location.href = "/profile"
     } catch(error) {
       console.log(error)
     }
@@ -132,10 +136,9 @@ export default function Navbar() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>
-                  <Link
-                  as={"a"}
-                  href={"/profile"}>Profile</Link></MenuItem>
+                  <MenuItem
+                  as={"button"}
+                  onClick={handleToProfile}>Profile</MenuItem>
                   <MenuItem>Account Settings</MenuItem>
                   <MenuItem
                   as={"button"}

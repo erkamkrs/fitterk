@@ -25,10 +25,13 @@ import {
 } from '@chakra-ui/react';
 import { CgAdd } from 'react-icons/cg';
 import { exerciseList } from '../../exerciseList';
+import { FaPlus } from 'react-icons/fa';
 
-const BodyPartsSelect = ({ setBodyPart, selectedBodyPart }) => {
+
+const BodyPartsSelect = ({ setBodyPart, setAddedExercise}) => {
   const [bodyPartSelected, setBodyPartSelected] = useState(null);
   const [exerciseSelected, setExerciseSelected] = useState(null);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const colorDark = useColorModeValue('#151f21', 'gray.900');
 
@@ -43,16 +46,15 @@ const BodyPartsSelect = ({ setBodyPart, selectedBodyPart }) => {
     count: steps.length,
   })
 
-
   const SelectBodyPart = (e) => {
-    setBodyPart(e);
-    setBodyPartSelected(selectedBodyPart);
+    setBodyPart(e.muscle);
+    setBodyPartSelected(e.muscle);
     setActiveStep(2)
   }
 
   const SelectExercise = (exercise) => {
     setExerciseSelected(exercise);
-    setActiveStep(3);
+    setActiveStep(3)
   };
 
   return (
@@ -69,12 +71,16 @@ const BodyPartsSelect = ({ setBodyPart, selectedBodyPart }) => {
           transform: 'translateY(-2px)',
           boxShadow: 'lg',
         }}
+        _active={{
+          transform: 'translateY(-1px)',
+          boxShadow: 'md',
+        }}
       >
         <CgAdd /> &nbsp; Start a Workout
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay/>
         <ModalContent>
           <ModalHeader textAlign={'center'}>Add an Exercise</ModalHeader>
           <ModalCloseButton />
@@ -94,67 +100,119 @@ const BodyPartsSelect = ({ setBodyPart, selectedBodyPart }) => {
                   <StepTitle>{step.title}</StepTitle>
                   <StepDescription>{step.description}</StepDescription>
                 </Box>
-
                 <StepSeparator />
               </Step>
             ))}
           </Stepper>
-            {activeStep == 1 &&
-            <Flex justifyContent="center" flexWrap="wrap">
-              {exerciseList.map((e) => (
-                <Box key={e.id}>
-                  <Button
-                    aria-label="Muscle Select"
-                    onClick={SelectBodyPart()}
-                    size="sm"
-                    fontSize="md"
-                    m={1.5}
-                    px={5}
-                    color="white"
-                    bg="indigo.700"
-                    rounded="full"
-                    _focus={{ shadow: 'outline' }}
-                    _hover={{ bg: 'indigo.800' }}
+            {activeStep === 1 &&
+            <Flex justifyContent="center" 
+            flexWrap="wrap"
+            flexDirection="row" 
+            padding={"5"}>
+            {exerciseList.map((e) => (
+              <Box key={e.id}>
+                <Button
+                  textAlign={"center"}
+                  aria-label="Muscle Select"
+                  onClick={() => SelectBodyPart(e)}
+                  size="lg"
+                  fontSize="md"
+                  bg={colorDark}
+                  color={'gray.200'}
+                  rounded="full"
+                  p={"2"}
+                  m={'1'}
+                  _focus={{ shadow: 'outline' }}
+                  _hover={{ bg: 'indigo.800' }}
                   >
-                    {e.muscle}
-                  </Button>
-                </Box>
-              ))}
-            </Flex>
+                  {e.muscle}
+                </Button>
+              </Box>
+            ))}
+          </Flex>
             }
-            {activeStep == 2 && bodyPartSelected && (
-              <Flex justifyContent="center" flexWrap="wrap">
-                {exerciseList
-                  .find((group) => group.muscle === bodyPartSelected)
-                  .exercises.map((exercise) => (
-                    <Box key={exercise.id}>
+            {activeStep === 2 && bodyPartSelected && (
+            <Flex 
+            alignContent="left"
+            justifyContent="center" 
+            flexWrap="wrap"
+            flexDirection="row" 
+            padding={"2"}>
+              {exerciseList
+                .find((group) => group.muscle === bodyPartSelected)
+                ?.exercises.map((exercise) => (
+                  <Box key={exercise.id}>
+                    <Button
+                      textAlign={"center"}
+                      aria-label="Exercise Select"
+                      onClick={() => SelectExercise(exercise.exercise)}
+                      size="lg"
+                      fontSize="md"
+                      bg={colorDark}
+                      color={'white'}
+                      rounded="full"
+                      p={"2"}
+                      m={'1'}
+                      _focus={{ shadow: 'outline' }}
+                      _hover={{ bg: 'indigo.800' }}
+                     >
+                      {exercise.exercise}
+                    </Button>
+                  </Box>
+                ))
+              }
+            </Flex>
+          )}
+          {activeStep === 3 && setExerciseSelected && (
+              <Flex 
+              alignContent="center"
+              justifyContent="center" 
+              flexWrap="wrap"
+              flexDirection="row" 
+              padding={"2"}>
+                    <Box>
                       <Button
-                        aria-label="Exercise Select"
-                        onClick={() => SelectExercise(exercise.exercise)}
-                        size="sm"
-                        fontSize="md"
-                        m={1.5}
-                        px={5}
-                        color="white"
-                        bg="indigo.700"
-                        rounded="full"
+                        as={"a"}
+                        textAlign={"center"}
+                        aria-label="Add Details"
+                        size="2xl"
+                        fontSize="xl"
+                        bg={colorDark}
+                        color={'white'}
+                        p={"2"}
+                        m={'2'}
                         _focus={{ shadow: 'outline' }}
                         _hover={{ bg: 'indigo.800' }}
-                      >
-                        {exercise.exercise}
+                       >
+                        {exerciseSelected}
                       </Button>
                     </Box>
-                  ))}
               </Flex>
-            )}
+          )}
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={setActiveStep(1)}>
-              Back
+          {activeStep === 3 && (
+              <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                setAddedExercise([...exerciseSelected]);
+                onClose();
+                setActiveStep(activeStep(1))
+              }}
+            >
+              <FaPlus /> &nbsp; Add Exercise
             </Button>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
+            )}
+            {activeStep > 1 && (
+              <Button 
+              colorScheme="blue" 
+              mr={3}  
+              onClick={() => setActiveStep(activeStep-1)}>
+                Back
+              </Button>
+            )}
+
           </ModalFooter>
         </ModalContent>
       </Modal>

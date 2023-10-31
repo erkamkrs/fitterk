@@ -11,28 +11,18 @@ import {
 } from '@chakra-ui/react'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import {CgGym} from 'react-icons/cg'
-import { ReactNode } from 'react'
 
-const Logo = (props: any) => {
+const Logo = (props) => {
   return (
     <>
     <Text fontSize={"2xl"}>
     <CgGym/>
     </Text>
     </>
-
   )
 }
 
-const SocialButton = ({
-  children,
-  label,
-  href,
-}: {
-  children: ReactNode
-  label: string
-  href: string
-}) => {
+const SocialButton = ({ children, label, href }) => {
   return (
     <chakra.button
       bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}

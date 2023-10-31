@@ -18,14 +18,16 @@ import {
   import { useState, useEffect } from 'react';
   import BodyPartsSelect from '../Modal/BodyPartsSelect';  
 
-  export default function ProfileCard() {
+
+  export default function ProfileCard(props) {
     const { user } = useAuth();
     const [loading, setLoading] = useState(true);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [selectedBodyPart, setSelectedBodyPart] = useState(null);
     const colorDark = useColorModeValue('#151f21', 'gray.900');
     const colorLight = useColorModeValue('white', 'gray.800');
-  
+    const {setAddedExercise, exerciseSelected} = props
+
     useEffect(() => {
       const checkAuthentication = async () => {
         await new Promise((resolve) => setTimeout(resolve, 50));
@@ -34,14 +36,11 @@ import {
       checkAuthentication();
     }, [user]);
   
-
-
-  
     return (
       <>
         <Center py={6}>
           {loading ? (
-            <Box height={'full'}>
+            <Box maxW={'5xl'} py={'24'}>
               <Spinner p={6} />
             </Box>
           ) : user ? (
@@ -81,7 +80,8 @@ import {
                     {/* Button that opens Modal for BodyPartsSelect */}
                   <BodyPartsSelect
                   setBodyPart={setSelectedBodyPart}
-                  selectedBodyPart={selectedBodyPart}               
+                  setAddedExercise={setAddedExercise}   
+                  exerciseSelected={exerciseSelected}           
                 // Pass the openModal function to the modal component
                 />   
   
@@ -103,17 +103,21 @@ import {
               </Box>
             </Box>
           ) : (
-            <Box
+            <Flex
               h={'300px'}
               w={'full'}
               boxShadow={'2xl'}
               rounded={'md'}
               overflow={'hidden'}
+              textAlign={'center'}
+              alignSelf={'center'}
+              m={20}
               alignItems={'center'}
-              m={10}
+              justifyContent={'center'}
             >
-              <Text>You must be logged in to view this page - protected route.</Text>
-            </Box>
+              <Text
+              fontSize={"2xl"}>You must be logged in to view this page - protected route.</Text>
+            </Flex>
           )}
         </Center>
   

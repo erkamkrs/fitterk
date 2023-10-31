@@ -1,49 +1,31 @@
-"use client"
-import ProfileCard from '@/components/Profile/ProfileCard'
-import Addsets from "@/components/AddSets"
-import { useEffect, useState } from "react"
-import { useAuth } from "../context/AuthContext"
-import { db } from "../../firebase"
-import React from 'react'
-import 
-{ Container,
+'use client'
+
+import {
   Box,
   Button,
   Flex,
   FormControl,
   FormLabel,
   Heading,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
-  NumberInputField,
-  NumberInput,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+  Text,
+  Stack,
   Textarea,
+  Tooltip,
+  useClipboard,
   useColorModeValue,
   VStack,
-} from '@chakra-ui/react'  
+} from '@chakra-ui/react'
+import { BsGithub, BsLinkedin, BsPerson, BsTwitter } from 'react-icons/bs'
 
 
-
-function Profile() {
-  //if login credentials of user disappear, revert back to login page
-  // const { user } = useAuth();
-  const [exerciseAdded, setAddedExercise] = useState(null);
-
+export default function AddSets() {
+    
   return (
-    <Container
-    maxW={'5xl'} py={'24'}>
-
-
-      
-      {exerciseAdded && exerciseAdded.length > 0 ? (<ProfileCard
-      setAddedExercise={setAddedExercise}
-      exerciseSelected={exerciseSelected}/>)
-      : (
-        <Flex
+    <Flex
       bg={useColorModeValue('gray.100', 'gray.900')}
       align="center"
       justify="center"
@@ -56,8 +38,60 @@ function Profile() {
                 base: '4xl',
                 md: '5xl',
               }}>
-
+              {exerciseAdded}
             </Heading>
+ 
+            <Stack
+              spacing={{ base: 4, md: 8, lg: 20 }}
+              direction={{ base: 'column', md: 'row' }}>
+              <Stack
+                align="center"
+                justify="space-around"
+                direction={{ base: 'row', md: 'column' }}>
+
+                <Box as="a" href="#">
+                  <IconButton
+                    aria-label="github"
+                    variant="ghost"
+                    size="lg"
+                    fontSize="3xl"
+                    icon={<BsGithub />}
+                    _hover={{
+                      bg: 'blue.500',
+                      color: useColorModeValue('white', 'gray.700'),
+                    }}
+                    isRound
+                  />
+                </Box>
+
+                <Box as="a" href="#">
+                  <IconButton
+                    aria-label="twitter"
+                    variant="ghost"
+                    size="lg"
+                    icon={<BsTwitter size="28px" />}
+                    _hover={{
+                      bg: 'blue.500',
+                      color: useColorModeValue('white', 'gray.700'),
+                    }}
+                    isRound
+                  />
+                </Box>
+
+                <Box as="a" href="#">
+                  <IconButton
+                    aria-label="linkedin"
+                    variant="ghost"
+                    size="lg"
+                    icon={<BsLinkedin size="28px" />}
+                    _hover={{
+                      bg: 'blue.500',
+                      color: useColorModeValue('white', 'gray.700'),
+                    }}
+                    isRound
+                  />
+                </Box>
+              </Stack>
 
               <Box
                 bg={useColorModeValue('white', 'gray.700')}
@@ -70,6 +104,7 @@ function Profile() {
                     <FormLabel>Weight</FormLabel>
                     <InputGroup>
                       <InputLeftElement>
+                        <BsPerson />
                       </InputLeftElement>
                       <Input type="number" name="weight" placeholder="Weight in Kg" />
                     </InputGroup>
@@ -120,14 +155,10 @@ function Profile() {
                   </Button>
                 </VStack>
               </Box>
+            </Stack>
           </VStack>
         </Box>
       </Box>
     </Flex>
-  )}
-
-    </Container>
   )
 }
-
-export default Profile

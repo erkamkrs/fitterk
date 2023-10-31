@@ -4,11 +4,8 @@ import Navbar from "@/components/Navbar";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { AuthContextProvider } from "./context/AuthContext";
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>

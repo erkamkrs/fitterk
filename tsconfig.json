@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/MainComponents/BodyPartSelect.jsx", "app/profile/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/MainComponents/BodyPartSelect.jsx", "app/profile/page.jsx", "components/Profile/ProfileCard.jsx", "app/page.jsx", "app/layout.jsx", "components/Features.jsx", "components/Footer.jsx", "components/HeroSection.jsx", "components/Navbar.jsx", "components/Testimonials.jsx", "exerciseList.jsx", "firebase.jsx"],
   "exclude": ["node_modules"]
 }
