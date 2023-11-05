@@ -11,17 +11,15 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-interface Props {
-  children: React.ReactNode
-}
 
-const Testimonial = (props: Props) => {
+
+const Testimonial = (props) => {
   const { children } = props
 
   return <Box>{children}</Box>
 }
 
-const TestimonialContent = (props: Props) => {
+const TestimonialContent = (props) => {
   const { children } = props
 
   return (
@@ -53,7 +51,7 @@ const TestimonialContent = (props: Props) => {
   )
 }
 
-const TestimonialHeading = (props: Props) => {
+const TestimonialHeading = (props) => {
   const { children } = props
 
   return (
@@ -63,7 +61,7 @@ const TestimonialHeading = (props: Props) => {
   )
 }
 
-const TestimonialText = (props: Props) => {
+const TestimonialText = (props) => {
   const { children } = props
 
   return (
@@ -80,10 +78,6 @@ const TestimonialAvatar = ({
   src,
   name,
   title,
-}: {
-  src: string
-  name: string
-  title: string
 }) => {
   return (
     <Flex align={'center'} mt={8} direction={'column'}>

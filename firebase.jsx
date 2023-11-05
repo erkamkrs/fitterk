@@ -3,7 +3,7 @@ import { getDoc, setDoc, doc, getFirestore } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your web app's Firebase configuration
-const firebaseApp = initializeApp({
+export const firebaseApp = initializeApp({
   apiKey: "AIzaSyAfyAcETRnHPEcNphdghBpuQzyNEyz6WQ8",
   authDomain: "fitterk-23.firebaseapp.com",
   projectId: "fitterk-23",

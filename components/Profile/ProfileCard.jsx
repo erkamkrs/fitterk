@@ -16,7 +16,7 @@ import {
   } from '@chakra-ui/react';
   import { useAuth } from '@/app/context/AuthContext';
   import { useState, useEffect } from 'react';
-  import BodyPartsSelect from '../Modal/BodyPartsSelect';  
+  import Main from '../Modal/Main';  
 
 
   export default function ProfileCard(props) {
@@ -26,7 +26,7 @@ import {
     const [selectedBodyPart, setSelectedBodyPart] = useState(null);
     const colorDark = useColorModeValue('#151f21', 'gray.900');
     const colorLight = useColorModeValue('white', 'gray.800');
-    const {setAddedExercise, exerciseSelected} = props
+    const [addedExercise, setAddedExercise] = useState([]);
 
     useEffect(() => {
       const checkAuthentication = async () => {
@@ -77,11 +77,10 @@ import {
                     </Heading>
                     <Text color={'gray.500'}>Gym beast</Text>
                   </Stack>
-                    {/* Button that opens Modal for BodyPartsSelect */}
-                  <BodyPartsSelect
+                    {/* Button that opens Modal for Main */}
+                  <Main
                   setBodyPart={setSelectedBodyPart}
                   setAddedExercise={setAddedExercise}   
-                  exerciseSelected={exerciseSelected}           
                 // Pass the openModal function to the modal component
                 />   
   
