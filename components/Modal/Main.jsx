@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -12,14 +12,6 @@ import {
   Box,
   useDisclosure,
   useColorModeValue,
-  Step,
-  StepIcon,
-  StepIndicator,
-  StepNumber,
-  StepSeparator,
-  StepStatus,
-  StepTitle,
-  Stepper,
   useSteps,
   FormControl,
   FormLabel,
@@ -36,22 +28,20 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { CgAdd } from 'react-icons/cg';
 import { exerciseList } from '../../exerciseList';
-import { FaPlus } from 'react-icons/fa';
-import { doc, setDoc } from "firebase/firestore"; 
+import { HiPlus, HiOutlineTrash } from 'react-icons/hi2';
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from '@/firebase';
 import { useAuth } from '@/app/context/AuthContext';
 
-
-
 const Main = ({ setBodyPart }) => {
   const { user } = useAuth();
+  const [workoutStarted, setWorkoutStarted] = useState(false);
+  const [workoutFinished, setWorkoutFinished] = useState(false);
   const [bodyPartSelected, setBodyPartSelected] = useState(null);
   const [exerciseSelected, setExerciseSelected] = useState(null);
   const [exercisesAdded, setAddedExercise] = useState([]);
-  const [workoutStarted, setWorkoutStarted] = useState(false);
-  const [workoutFinished, setWorkoutFinished] = useState(false);
+  const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState(0);
   const [sets, setSets] = useState(0);
@@ -59,12 +49,10 @@ const Main = ({ setBodyPart }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const colorDark = useColorModeValue('#151f21', 'gray.900');
   const today = new Date();
-  const day = today.getDate(); // Day of the month (1-31)
-  const month = today.getMonth() + 1; // Month number (1-12), note that JavaScript counts months from 0-11, so we add 1
-  const year = today.getFullYear(); // Full year (e.g. 2022)
-  const formattedDate = `${day}-${month}-${year}`; // Format the date as you like
-
-
+  const day = today.getDate(); 
+  const month = today.getMonth() + 1; 
+  const year = today.getFullYear(); 
+  const formattedDate = `${day}-${month}-${year}`; 
   const steps = [
     { title: 'Body Part', description: '' },
     { title: 'Exercise', description: '' },
@@ -81,12 +69,17 @@ const Main = ({ setBodyPart }) => {
     setBodyPart(e.muscle);
     setBodyPartSelected(e.muscle);
     setActiveStep(2)
-  }
+  };
 
   const SelectExercise = (exercise) => {
     setExerciseSelected(exercise);
     setActiveStep(3)
   };
+
+  const SelectExerciseToEdit = (exercise) => {
+    setExerciseToEdit(exercise)
+    setActiveStep(5)
+  }
 
   return (
     <>
@@ -107,7 +100,7 @@ const Main = ({ setBodyPart }) => {
           boxShadow: 'md',
         }}
       >
-        <CgAdd /> &nbsp; Start a Workout
+        <HiPlus /> &nbsp; Start a Workout
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -120,26 +113,6 @@ const Main = ({ setBodyPart }) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          {/* <Stepper index={activeStep}>
-            {steps.map((step, index) => (
-              <Step key={index}>
-                <StepIndicator>
-                  <StepStatus
-                    complete={<StepIcon />}
-                    incomplete={<StepNumber />}
-                    active={<StepNumber />}
-                  />
-                </StepIndicator>
-
-                <Box flexShrink='0'>
-                  <StepTitle padding="1" fontSize="sm">
-                    {step.title}
-                  </StepTitle>
-                </Box>
-                <StepSeparator />
-              </Step>
-            ))}
-          </Stepper> */}
             {activeStep === 1 &&
             <Flex justifyContent="center" 
             flexWrap="wrap"
@@ -255,7 +228,6 @@ const Main = ({ setBodyPart }) => {
 
                           <FormControl isRequired>
                             <FormLabel>Note</FormLabel>
-
                             <Textarea
                               name="note"
                               placeholder="Notes about the exercise"
@@ -269,22 +241,21 @@ const Main = ({ setBodyPart }) => {
                             colorScheme="blue"
                             mr={3}
                             onClick={() => {
-                              const newExercise = {
-                                exercise: exerciseSelected,
-                                weight: weight,
-                                reps: reps,
-                                sets: sets,
-                                note: note,
-                              };
                               setAddedExercise(prevExercises => {
-                                console.log('Previous exercises:', prevExercises);
-                                console.log('New exercise:', newExercise);
+                                const newExercise = {
+                                  id: prevExercises.length, // Use the length of the array as the id
+                                  exercise: exerciseSelected,
+                                  weight: weight,
+                                  reps: reps,
+                                  sets: sets,
+                                  note: note,
+                                };
                                 return [...prevExercises, newExercise];
                               });
                               setActiveStep(4);
                               setWorkoutStarted(true);
                             }}>
-                            <FaPlus /> &nbsp; Add Exercise
+                            <HiPlus /> &nbsp; Add Exercise
                           </Button>
                         </VStack>
                       </Box>
@@ -293,7 +264,10 @@ const Main = ({ setBodyPart }) => {
               </Box>
             </Flex>
           )}
-          {activeStep === 4 &&  (
+          {activeStep === 4 && exercisesAdded.length === 0 && (
+            setActiveStep(1)
+          )}
+          {activeStep === 4 && exercisesAdded.length > 0 && (
             <Flex justifyContent="center" 
             flexWrap="wrap"
             flexDirection="row" 
@@ -302,14 +276,16 @@ const Main = ({ setBodyPart }) => {
               <Box 
               alignItems={"left"}
               key={x.id}>
-                <Box
+                <Button
+                onClick={() => SelectExerciseToEdit(x)}
                 size="lg"
                 fontSize="md"
                 bg={colorDark}
                 color={'white'}
                 rounded={'md'}
                 p={"2"}
-                m={'1'}>
+                m={'1'}
+                >
                   <VStack 
                   spacing={{ base: 1, md: 2, lg: 2 }}
                   padding={"1"}>
@@ -318,32 +294,57 @@ const Main = ({ setBodyPart }) => {
                         {x.exercise}
                       </Text>
                   </VStack>
-                  <VStack spacing={{ base: 1, md: 2, lg: 2 }}
-                  padding={"1"}>
-                      <Text
-                      spacing={{ base: 1 }}>
-                        Weight = {x.weight} kg
-                      </Text>                      
-                      <Text
-                      spacing={{ base: 1 }}>
-                        Reps = {x.reps}
-                      </Text>
-                      <Text
-                      spacing={{ base: 1 }}>
-                        Sets = {x.sets}
-                      </Text>
-                      <Text
-                      spacing={{ base: 1 }}>
-                        Note = {x.note}
-                      </Text>
-                  </VStack>
-                </Box>
+                </Button>
               </Box>
                ))}
             </Flex>
           )}
+          {activeStep === 5 &&  (
+            <Flex justifyContent="center" flexWrap="wrap" flexDirection="row" padding={"5"}>
+            <Box alignItems={"left"} key={exerciseToEdit.id}>
+              <Box
+                size="lg"
+                fontSize="md"
+                bg={colorDark}
+                color={'white'}
+                rounded={'md'}
+                p={"2"}
+                m={'1'}
+              >
+                <VStack spacing={{ base: 1, md: 2, lg: 2 }} padding={"1"}>
+                  <Text spacing={{ base: 2 }}>
+                    {exerciseToEdit.exercise}
+                  </Text>
+                </VStack>
+                <VStack spacing={{ base: 1, md: 2, lg: 2 }} padding={"1"}>
+                  <Text spacing={{ base: 1 }}>
+                    Weight = {exerciseToEdit.weight} kg
+                  </Text>
+                  <Text spacing={{ base: 1 }}>
+                    Reps = {exerciseToEdit.reps}
+                  </Text>
+                  <Text spacing={{ base: 1 }}>
+                    Sets = {exerciseToEdit.sets}
+                  </Text>
+                  <Text spacing={{ base: 1 }}>
+                    Note = {exerciseToEdit.note}
+                  </Text>
+                </VStack>
+              </Box>
+            </Box>
+          </Flex>
+          )}
           </ModalBody>
           <ModalFooter>
+          {activeStep < 4 && exercisesAdded.length > 0 && (
+            <Button 
+            colorScheme="blue" 
+            mr={3}  
+            width={"200px"}
+            onClick={() => setActiveStep(4)}>
+              Workout Process
+            </Button>
+          )}
           {activeStep > 1 && (
               <Button 
               colorScheme="blue" 
@@ -359,7 +360,7 @@ const Main = ({ setBodyPart }) => {
               onClick={() => {
                 setActiveStep(1);
               }}>
-               <FaPlus /> &nbsp; Add Another Exercise
+                  <HiPlus /> &nbsp; Add Another Exercise
               </Button>
             )}
             {activeStep === 4 && (
@@ -367,18 +368,57 @@ const Main = ({ setBodyPart }) => {
               colorScheme="blue" 
               mr={3}  
               onClick={async () => {
+                const docRef = doc(db, "workouts", user.displayName);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                  // Document exists, update the exercises and date
+                  const existingData = docSnap.data();
+                  const updatedData = {...existingData};
+                  updatedData[formattedDate] = {
+                    exercises: [...(existingData[formattedDate]?.exercises || []), ...exercisesAdded]
+                  };
+
+                  await setDoc(docRef, updatedData);
+                } else {
+                  // Document does not exist, create it
+                  await setDoc(docRef, {
+                    [formattedDate]: {
+                      exercises: exercisesAdded,
+                    },
+                  });
+                }
                 setWorkoutFinished(true);
                 onClose();
                 setActiveStep(1);
-            
-                const docData = {
-                  exercises: exercisesAdded,
-                  date: formattedDate,
-                  
-                };  
-                await setDoc(doc(db, "workouts", user.displayName), docData);
+                setAddedExercise([]); // Reset the exercisesAdded state to an empty array
               }}>
               Finish Workout
+            </Button>
+            )}
+             {activeStep === 5 && (
+              <Button 
+              colorScheme="blue" 
+              mr={3}  
+              onClick={() => {
+                setActiveStep(3);
+              }}>
+               <HiPlus /> &nbsp; Add More Sets
+              </Button>
+            )}
+            {activeStep === 5 && (
+              <Button 
+              colorScheme="blue" 
+              mr={3}  
+              onClick={() => {
+                setAddedExercise(prevExercises => {
+                  const updatedExercises = prevExercises.filter(exercise => exercise.id !== exerciseToEdit.id);
+                  return updatedExercises;
+                });
+                setActiveStep(4);
+              }}
+            >
+              <HiOutlineTrash /> &nbsp; Remove Exercise
             </Button>
             )}
           </ModalFooter>
