@@ -100,7 +100,7 @@ const Main = ({ setBodyPart }) => {
           boxShadow: 'md',
         }}
       >
-        <HiPlus /> &nbsp; Start a Workout
+         Start a Workout
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -182,6 +182,7 @@ const Main = ({ setBodyPart }) => {
               <Box borderRadius="lg" m={{ base: 2, md: 4, lg: 6 }} >
                 <Box>
                   <VStack spacing={{ base: 2, md: 4, lg: 6 }}>
+
                     <Heading
                       alignContent={"center"}
                       fontSize={{
@@ -190,6 +191,7 @@ const Main = ({ setBodyPart }) => {
                       }}>
                         {exerciseSelected}
                     </Heading>
+
                       <Box
                         borderRadius="lg"
                         p={8}
@@ -424,7 +426,6 @@ const Main = ({ setBodyPart }) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
     </>
   );
 };

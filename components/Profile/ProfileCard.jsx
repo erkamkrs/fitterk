@@ -17,7 +17,7 @@ import {
   import { useAuth } from '@/app/context/AuthContext';
   import { useState, useEffect } from 'react';
   import Main from '../Modal/Main';  
-
+  import WorkoutHistoryModal from '../Modal/WorkoutHistory';  
 
   export default function ProfileCard(props) {
     const { user } = useAuth();
@@ -82,22 +82,9 @@ import {
                   setBodyPart={setSelectedBodyPart}
                   setAddedExercise={setAddedExercise}   
                 // Pass the openModal function to the modal component
-                />   
-  
-                  <Button
-                    w={'full'}
-                    mt={8}
-                    bg={colorDark}
-                    color={'white'}
-                    fontSize={'lg'}
-                    rounded={'full'}
-                    _hover={{
-                      transform: 'translateY(-2px)',
-                      boxShadow: 'lg',
-                    }}
-                  >
-                     Workout History
-                  </Button>
+                  />   
+                  <WorkoutHistoryModal 
+                  />
                 </Box>
               </Box>
             </Box>
