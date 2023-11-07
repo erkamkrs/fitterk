@@ -4,12 +4,12 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your web app's Firebase configuration
 export const firebaseApp = initializeApp({
-  apiKey: "AIzaSyAfyAcETRnHPEcNphdghBpuQzyNEyz6WQ8",
-  authDomain: "fitterk-23.firebaseapp.com",
-  projectId: "fitterk-23",
-  storageBucket: "fitterk-23.appspot.com",
-  messagingSenderId: "207253210514",
-  appId: "1:207253210514:web:c8a4572c5ccf6028992d4b"
+  apiKey: NEXT_PUBLIC_API_KEY,
+  authDomain: NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: NEXT_PUBLIC_APP_ID
 });
 
 // Initialize Firebase
