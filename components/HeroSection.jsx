@@ -9,14 +9,25 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react'
- 
+import React, { useState, useEffect } from 'react';
+
 
 export default function HeroSection() {
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowImage(true);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
-          <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+          <Heading fontSize={{ base: '5xl', md: '5xl', lg: '5xl' }}>
             <Text
               as={'span'}
               position={'relative'}
@@ -34,7 +45,8 @@ export default function HeroSection() {
             </Text>
             <br />{' '}
             <Text color={'cyan.400'} as={'span'} fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}>
-            More than an App, Your Partner on the Journey to a Healthier You
+            More than an App, <br/>
+            Your Partner on the Journey to a Healthier You
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
@@ -53,14 +65,17 @@ export default function HeroSection() {
           </Stack>
         </Stack>
       </Flex>
-      <Flex flex={1}>
-        <Image
-          alt={'Squat Image'}
-          src='/kettlebell.jpg'
-          height="80%"
-          width="100%"
-        />
-      </Flex>
+      {useBreakpointValue({ base: null, md: 
+      <Flex pt={{ base: '8', md: '10', lg: '8' }} flex={1}>
+      <Image
+        alt={'Squat Image'}
+        src='/kettlebell.jpg'
+        width={{ base: 'xl', md: 'lg', lg: 'xl' }}
+        height={{ base: 'xl', md: 'md', lg: 'xl' }}
+        borderRadius="xl"
+        className={showImage ? 'fade-in show' : 'fade-in'}
+      />
+    </Flex> })}
     </Stack>
   )
 }

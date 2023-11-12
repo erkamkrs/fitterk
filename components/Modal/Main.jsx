@@ -30,7 +30,7 @@ import {
 } from '@chakra-ui/react';
 import { exerciseList } from '../../exerciseList';
 import { HiPlus, HiOutlineTrash } from 'react-icons/hi2';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from '@/firebase';
 import { useAuth } from '@/app/context/AuthContext';
 
@@ -74,6 +74,10 @@ const Main = ({ setBodyPart }) => {
   const SelectExercise = (exercise) => {
     setExerciseSelected(exercise);
     setActiveStep(3)
+    setWeight("");
+    setReps(0);
+    setSets(0);
+    setNote("");
   };
 
   const SelectExerciseToEdit = (exercise) => {
@@ -338,6 +342,31 @@ const Main = ({ setBodyPart }) => {
           )}
           </ModalBody>
           <ModalFooter>
+          {activeStep > 1 && (
+              <Button 
+              colorScheme="blue" 
+              mr={3}  
+              onClick={() => setActiveStep(activeStep-1)}>
+                Back
+              </Button>
+            )}
+          {activeStep === 2 && bodyPartSelected && (
+            <Button
+            textAlign={"center"}
+            aria-label="Create Exercise"
+            onClick={() => {
+              const newExerciseName = prompt("Enter the name of the new exercise"); 
+              if (newExerciseName) {
+                SelectExercise(newExerciseName);
+              }
+            }}
+            colorScheme="blue" 
+            mr={3}  
+            width={"200px"}
+          >
+           <HiPlus /> &nbsp; Different Exercise
+          </Button>
+          )}
           {activeStep < 4 && exercisesAdded.length > 0 && (
             <Button 
             colorScheme="blue" 
@@ -347,14 +376,6 @@ const Main = ({ setBodyPart }) => {
               Workout Process
             </Button>
           )}
-          {activeStep > 1 && (
-              <Button 
-              colorScheme="blue" 
-              mr={3}  
-              onClick={() => setActiveStep(activeStep-1)}>
-                Back
-              </Button>
-            )}
             {activeStep === 4 && (
               <Button 
               colorScheme="blue" 
@@ -377,6 +398,8 @@ const Main = ({ setBodyPart }) => {
                   // Document exists, update the exercises and date
                   const existingData = docSnap.data();
                   const updatedData = {...existingData};
+                  // Find the exercise with the largest ID
+      
                   updatedData[formattedDate] = {
                     exercises: [...(existingData[formattedDate]?.exercises || []), ...exercisesAdded]
                   };

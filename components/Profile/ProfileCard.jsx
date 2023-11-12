@@ -22,7 +22,6 @@ import {
   export default function ProfileCard(props) {
     const { user } = useAuth();
     const [loading, setLoading] = useState(true);
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [selectedBodyPart, setSelectedBodyPart] = useState(null);
     const colorDark = useColorModeValue('#151f21', 'gray.900');
     const colorLight = useColorModeValue('white', 'gray.800');
@@ -30,7 +29,7 @@ import {
 
     useEffect(() => {
       const checkAuthentication = async () => {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         setLoading(false);
       };
       checkAuthentication();
@@ -45,8 +44,9 @@ import {
             </Box>
           ) : user ? (
             <Box
-              maxW={'270px'}
-              w={'full'}
+              maxH={"500px"}
+              maxW={'300px'}
+              w={'100%'}
               bg={colorLight}
               boxShadow={'2xl'}
               rounded={'md'}
@@ -68,7 +68,6 @@ import {
                   }}
                 />
               </Flex>
-  
               <Box p={6}>
                 <Box p={6}>
                   <Stack spacing={0} align={'center'} mb={5}>
@@ -106,7 +105,6 @@ import {
             </Flex>
           )}
         </Center>
-  
    </>
     );
   }

@@ -15,7 +15,7 @@ import {CgGym} from 'react-icons/cg'
 const Logo = (props) => {
   return (
     <>
-    <Text fontSize={"2xl"}>
+    <Text fontSize={"4xl"}>
     <CgGym/>
     </Text>
     </>
@@ -52,14 +52,13 @@ export default function Footer() {
       color={useColorModeValue('gray.700', 'gray.200')}>
       <Container
         as={Stack}
-        maxW={'6xl'}
-        py={4}
+        py={"4"}
         direction={{ base: 'column', md: 'row' }}
         spacing={4}
-        justify={{ base: 'center', md: 'space-between' }}
+        justify={{ base: 'space-between', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}>
         <Logo />
-        <Text>© Made by Erkam Kiris. All rights reserved</Text>
+        <Text flex={1}>© Made by Erkam Kiris. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'#'}>
             <FaTwitter />

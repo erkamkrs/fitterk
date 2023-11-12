@@ -94,7 +94,8 @@ const TestimonialAvatar = ({
 
 export default function Testimonials() {
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.700')}>
+    <Box bg={useColorModeValue('gray.100', 'gray.700')}
+    borderRadius="xl">
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
           <Heading>Our Clients Speak</Heading>

@@ -17,11 +17,4 @@ export const db = getFirestore();
 export const auth = getAuth(firebaseApp);
 
 
-// Detect Auth State
-onAuthStateChanged(auth, user => {
-  if(user !== null) {
-    console.log(`UserName: ${user.displayName}`)
-  }else {
-    console.log("No User")
-  }
-})
+
