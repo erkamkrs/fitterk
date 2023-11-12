@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your web app's Firebase configuration
 export const firebaseApp = initializeApp({
-  apiKey: "NEXT_PUBLIC_API_KEY",
+  apiKey: "AIzaSyAfyAcETRnHPEcNphdghBpuQzyNEyz6WQ8",
   authDomain: "fitterk-23.firebaseapp.com",
   projectId: "fitterk-23",
   storageBucket: "fitterk-23.appspot.com",
