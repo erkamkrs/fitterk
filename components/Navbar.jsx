@@ -99,7 +99,7 @@ export default function Navbar() {
             {!user ? (
               <Button
               onClick={handleSignIn}
-              display={{ base: 'none', md: 'inline-flex' }}
+              display={{ base: 'inline-flex', md: 'inline-flex' }}
               fontSize={'md'}
               fontWeight={600}
               color={'white'}

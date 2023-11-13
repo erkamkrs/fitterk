@@ -18,7 +18,7 @@ export default function HeroSection() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowImage(true);
-    }, 1000);
+    }, 50);
 
     return () => clearTimeout(timeout);
   }, []);
