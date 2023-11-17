@@ -33,6 +33,8 @@ import { HiPlus, HiOutlineTrash } from 'react-icons/hi2';
 import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from '@/firebase';
 import { useAuth } from '@/app/context/AuthContext';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const Main = ({ setBodyPart }) => {
   const { user } = useAuth();
@@ -244,25 +246,64 @@ const Main = ({ setBodyPart }) => {
                             />
                           </FormControl>
                           <Button
-                            colorScheme="blue"
-                            mr={3}
-                            onClick={() => {
-                              setAddedExercise(prevExercises => {
-                                const newExercise = {
-                                  id: prevExercises.length, // Use the length of the array as the id
-                                  exercise: exerciseSelected,
-                                  weight: weight,
-                                  reps: reps,
-                                  sets: sets,
-                                  note: note,
-                                };
-                                return [...prevExercises, newExercise];
-                              });
-                              setActiveStep(4);
-                              setWorkoutStarted(true);
-                            }}>
-                            <HiPlus /> &nbsp; Add Exercise
-                          </Button>
+  colorScheme="blue"
+  mr={3}
+  onClick={() => {
+    setAddedExercise((prevExercises) => {
+      const existingExerciseIndex = prevExercises.findIndex(
+        (exercise) => exercise.exercise === exerciseSelected
+      );
+      let updatedExercises = [...prevExercises];
+
+      if (existingExerciseIndex !== -1) {
+        // If the exercise already exists, update it
+        const existingExercise = updatedExercises[existingExerciseIndex];
+
+        // Update sets and reps only if they are not already included
+        const setsArr = existingExercise.sets.split(' - ');
+        if (!setsArr.includes(sets.toString())) {
+          setsArr.push(sets.toString());
+        }
+
+        const repsArr = existingExercise.reps.split(' - ');
+        if (!repsArr.includes(reps.toString())) {
+          repsArr.push(reps.toString());
+        }
+
+        existingExercise.sets = setsArr.join(' - ');
+        existingExercise.reps = repsArr.join(' - ');
+
+        // Update values only if they are not already included
+        if (!existingExercise.weight.includes(weight)) {
+          existingExercise.weight = `${existingExercise.weight} - ${weight}`;
+        }
+        if (!existingExercise.note.includes(note)) {
+          existingExercise.note = `${existingExercise.note} - ${note}`;
+        }
+      } else {
+        // If the exercise does not exist, add a new instance
+        const newExercise = {
+          id: uuidv4(),
+          exercise: exerciseSelected,
+          weight: weight,
+          reps: reps.toString(),
+          sets: sets.toString(),
+          note: note,
+        };
+        updatedExercises.push(newExercise);
+      }
+
+      return updatedExercises;
+    });
+
+    setActiveStep(4);
+    setWorkoutStarted(true);
+  }}
+>
+  <HiPlus /> &nbsp; Add Exercise
+</Button>
+
+
                         </VStack>
                       </Box>
                   </VStack>
