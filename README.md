@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fitterk Workout App
+![Alt text](public/fitterk.png)
+
+## Overview
+
+Fitterk is a fitness app designed for resistance training. It allows users to create, track, and update their daily workout routines. The app provides a user-friendly interface to select exercises based on specific body parts, add sets and repetitions, and track progress over time.
+
+## Features
+
+- **User Authentication:** Sign in with Google or Facebook to create a profile and start tracking your workouts.
+
+- **Exercise Selection:** Choose exercises based on specific body parts to tailor your workout routine.
+
+- **Set and Rep Tracking:** Add sets, repetitions, and weight for each exercise to monitor your performance.
+
+- **Physical Stats Tracking:** Track your physical stats like weight, height, and daily calorific intake to monitor overall fitness progress.
+
+- **Workout History:** Users can go back and view, add, update, or delete past workouts to maintain a comprehensive workout history.
+
+## Technologies Used
+
+- **Next.js:** A React framework for building server-rendered and statically generated web applications.
+
+- **Firebase Firestore:** A NoSQL cloud database to store and manage workout data.
+
+- **Firebase Authentication:** Provides user authentication services for secure login and profile management.
+
+- **Chakra UI:** A popular React UI framework for designing responsive and accessible user interfaces.
+
+- **Immer:** A library for working with immutable data structures to simplify state management.
 
 ## Getting Started
 
-First, run the development server:
+### Running the Project Locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Install dependencies: Run `npm install` in the root project directory.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the project: Execute `npm run dev` to start the development server.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Components:** React components used throughout the app.
 
-## Learn More
+- **Firebase:** Configuration and utility functions for Firebase integration.
 
-To learn more about Next.js, take a look at the following resources:
+- **Context:** React context for managing user authentication.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Styles:** Stylesheets and theme configuration for Chakra UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **ExerciseList:** A list of exercises categorized by body parts.
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Alt text](public/home-page.png)
+1. Sign-in using Google Account 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Alt text](public/start-workout.png)
+2. Click on "Start a Workout" to begin creating your workout routine.
+
+3. Follow the step-by-step process to select the body part, choose an exercise, add sets and reps, and review your exercises.
+![Alt text](public/modal-1.png)
+![Alt text](public/modal-2.png)
+![Alt text](public/modal-3.png)
+![Alt text](public/modal-4.png)
+![Alt text](public/modal-5.png)
+
+4. Finish the workout by clicking "Finish Workout." The app will store your workout data in Firebase Firestore.
+
+5. View and manage your workout history by navigating to past workouts.
+![Alt text](public/workout-history.png)
+![Alt text](public/select-date.png)
+![Alt text](public/workout-details.png)
+## Contributing
+
+Contributions to the Fitterk Workout App are welcome! If you find any bugs or have suggestions for improvements, feel free to submit an issue or pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
+
+## Acknowledgments
+
+- Special thanks to the [Chakra UI](https://chakra-ui.com/) and [Firebase](https://firebase.google.com/) communities for their excellent tools and documentation.
+
+Enjoy your workouts with Fitterk!
