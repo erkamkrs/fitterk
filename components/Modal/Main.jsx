@@ -246,64 +246,62 @@ const Main = ({ setBodyPart }) => {
                             />
                           </FormControl>
                           <Button
-  colorScheme="blue"
-  mr={3}
-  onClick={() => {
-    setAddedExercise((prevExercises) => {
-      const existingExerciseIndex = prevExercises.findIndex(
-        (exercise) => exercise.exercise === exerciseSelected
-      );
-      let updatedExercises = [...prevExercises];
+                            colorScheme="blue"
+                            mr={3}
+                            onClick={() => {
+                              setAddedExercise((prevExercises) => {
+                                const existingExerciseIndex = prevExercises.findIndex(
+                                  (exercise) => exercise.exercise === exerciseSelected
+                                );
+                                let updatedExercises = [...prevExercises];
 
-      if (existingExerciseIndex !== -1) {
-        // If the exercise already exists, update it
-        const existingExercise = updatedExercises[existingExerciseIndex];
+                                if (existingExerciseIndex !== -1) {
+                                  // If the exercise already exists, update it
+                                  const existingExercise = updatedExercises[existingExerciseIndex];
 
-        // Update sets and reps only if they are not already included
-        const setsArr = existingExercise.sets.split(' - ');
-        if (!setsArr.includes(sets.toString())) {
-          setsArr.push(sets.toString());
-        }
+                                  // Update sets and reps only if they are not already included
+                                  const setsArr = existingExercise.sets.split(' - ');
+                                  if (!setsArr.includes(sets.toString())) {
+                                    setsArr.push(sets.toString());
+                                  }
 
-        const repsArr = existingExercise.reps.split(' - ');
-        if (!repsArr.includes(reps.toString())) {
-          repsArr.push(reps.toString());
-        }
+                                  const repsArr = existingExercise.reps.split(' - ');
+                                  if (!repsArr.includes(reps.toString())) {
+                                    repsArr.push(reps.toString());
+                                  }
 
-        existingExercise.sets = setsArr.join(' - ');
-        existingExercise.reps = repsArr.join(' - ');
+                                  existingExercise.sets = setsArr.join(' - ');
+                                  existingExercise.reps = repsArr.join(' - ');
 
-        // Update values only if they are not already included
-        if (!existingExercise.weight.includes(weight)) {
-          existingExercise.weight = `${existingExercise.weight} - ${weight}`;
-        }
-        if (!existingExercise.note.includes(note)) {
-          existingExercise.note = `${existingExercise.note} - ${note}`;
-        }
-      } else {
-        // If the exercise does not exist, add a new instance
-        const newExercise = {
-          id: uuidv4(),
-          exercise: exerciseSelected,
-          weight: weight,
-          reps: reps.toString(),
-          sets: sets.toString(),
-          note: note,
-        };
-        updatedExercises.push(newExercise);
-      }
+                                  // Update values only if they are not already included
+                                  if (!existingExercise.weight.includes(weight)) {
+                                    existingExercise.weight = `${existingExercise.weight} - ${weight}`;
+                                  }
+                                  if (!existingExercise.note.includes(note)) {
+                                    existingExercise.note = `${existingExercise.note} - ${note}`;
+                                  }
+                                } else {
+                                  // If the exercise does not exist, add a new instance
+                                  const newExercise = {
+                                    id: uuidv4(),
+                                    exercise: exerciseSelected,
+                                    weight: weight,
+                                    reps: reps.toString(),
+                                    sets: sets.toString(),
+                                    note: note,
+                                  };
+                                  updatedExercises.push(newExercise);
+                                }
 
-      return updatedExercises;
-    });
+                                return updatedExercises;
+                              });
 
-    setActiveStep(4);
-    setWorkoutStarted(true);
-  }}
->
-  <HiPlus /> &nbsp; Add Exercise
-</Button>
-
-
+                              setActiveStep(4);
+                              setWorkoutStarted(true);
+                            }}
+                          >
+                            <HiPlus /> &nbsp; Add Exercise
+                          </Button>
                         </VStack>
                       </Box>
                   </VStack>
