@@ -301,7 +301,7 @@ const Main = ({ setBodyPart }) => {
                             }}
                           >
                             <HiPlus /> &nbsp; Add Exercise
-                          </Button>
+                          </Button> 
                         </VStack>
                       </Box>
                   </VStack>
