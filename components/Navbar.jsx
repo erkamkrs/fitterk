@@ -139,7 +139,6 @@ export default function Navbar() {
                   <MenuItem
                   as={"button"}
                   onClick={handleToProfile}>Profile</MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
                   <MenuItem
                   as={"button"}
                   onClick={handleSignOut}

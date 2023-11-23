@@ -9,7 +9,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from '@chakra-ui/react'
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
 import {CgGym} from 'react-icons/cg'
 
 const Logo = (props) => {
@@ -60,13 +60,13 @@ export default function Footer() {
         <Logo />
         <Text flex={1}>© Made by Erkam Kiris. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
-          <SocialButton label={'Twitter'} href={'#'}>
+          <SocialButton label={'Twitter'} href={'https://twitter.com/erkamkiris'}>
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={'YouTube'} href={'#'}>
-            <FaYoutube />
+          <SocialButton label={'Github'} href={'https://github.com/erkamkrs'}>
+            <FaGithub />
           </SocialButton>
-          <SocialButton label={'Instagram'} href={'#'}>
+          <SocialButton label={'Instagram'} href={'https://instagram.com/erkamkiris'}>
             <FaInstagram />
           </SocialButton>
         </Stack>
