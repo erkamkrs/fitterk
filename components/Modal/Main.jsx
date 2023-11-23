@@ -171,7 +171,7 @@ const Main = ({ setBodyPart }) => {
                       m={'2'}
                       _focus={{ shadow: 'outline' }}
                       _hover={{ bg: 'indigo.800' }}
-                      width="230px" 
+                      width="240px" 
                      >
                       {exercise.exercise}
                     </Button>
@@ -402,16 +402,17 @@ const Main = ({ setBodyPart }) => {
             }}
             colorScheme="blue" 
             mr={3}  
-            width={{ base: "full", md: "200px" }}
+            fontSize={"md"}
+            width={{ base: "250px", md: "200px" }}
             >
-           <HiPlus /> &nbsp; Different Exercise
+           Add Different Exercise
           </Button>
           )}
           {activeStep < 4 && exercisesAdded.length > 0 && (
             <Button 
             colorScheme="blue" 
             mr={3}  
-            width={{ base: "full", md: "200px" }}
+            width={{ base: "200px", md: "200px" }}
             onClick={() => setActiveStep(4)}>
               Workout Process
             </Button>
@@ -420,7 +421,7 @@ const Main = ({ setBodyPart }) => {
               <Button 
               colorScheme="blue" 
               mr={3}  
-              width={{ base: "full", md: "230px" }}  
+              width={{ base: "300px", md: "230px" }}  
 
               onClick={() => {
                 setActiveStep(1);
@@ -432,7 +433,7 @@ const Main = ({ setBodyPart }) => {
               <Button 
               colorScheme="blue" 
               mr={3}  
-              width={{ base: "full", md: "200px" }}
+              width={{ base: "200px", md: "200px" }}
               onClick={async () => {
                 const docRef = doc(db, "workouts", user.displayName);
                 const docSnap = await getDoc(docRef);
