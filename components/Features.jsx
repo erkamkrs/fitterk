@@ -12,7 +12,7 @@ import {
   Icon,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { IoAnalyticsSharp, IoLogoBitcoin, IoSearchSharp } from 'react-icons/io5'
+import { IoAnalyticsSharp, IoLogoYoutube, IoSearchSharp } from 'react-icons/io5'
 import { ReactElement } from 'react'
 
 const Feature = ({ text, icon, iconBg }) => {
@@ -28,8 +28,8 @@ const Feature = ({ text, icon, iconBg }) => {
 
 export default function Features() {
   return (
-    <Container maxW={'5xl'} py={12}>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={20} >
+    <Container id={"features"} maxW={{ base: 'xl', lg: '5xl' }} py={{ base: 12, lg: 24 }}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={20}>
         <Flex>
           <Image
             rounded={'md'}
@@ -40,21 +40,21 @@ export default function Features() {
             width={"100%"}
           />
         </Flex>
-        <Stack spacing={4}>
+        <Stack spacing={2}>
           <Text
+            fontSize={{ base: 'xl', lg: '2xl' }}
             textTransform={'uppercase'}
             color={'blue.400'}
             fontWeight={600}
-            fontSize={'sm'}
             bg={useColorModeValue('blue.50', 'blue.900')}
             p={2}
             alignSelf={'flex-start'}
             rounded={'md'}>
             Our Story
           </Text>
-          <Heading>Join Fitterk, Join the Movement: Your Fitness, Your Way.</Heading>
-          <Text color={'gray.500'} fontSize={'lg'}>
-            Register now and track your process for FREE!
+          <Heading fontSize={{ base: '3xl', lg: '5xl' }}>Join Fitterk, Join the Movement: Your Fitness, Your Way.</Heading>
+          <Text color={'gray.500'} fontSize={{ base: 'md', lg: 'lg' }}>
+            Register now and track your process while getting access to a variety of workouts and exercises.
           </Text>
           <Stack
             spacing={4}
@@ -67,7 +67,7 @@ export default function Features() {
               text={'Workout Planning'}
             />
             <Feature
-              icon={<Icon as={IoLogoBitcoin} color={'green.500'} w={5} h={5} />}
+              icon={<Icon as={IoLogoYoutube} color={'green.500'} w={5} h={5} />}
               iconBg={useColorModeValue('green.100', 'green.900')}
               text={'Exercise Demonstrotion'}
             />

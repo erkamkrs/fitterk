@@ -1,7 +1,10 @@
 'use client'
 
 import {
+  Avatar,
   Box,
+  Flex,
+  colorMode,
   chakra,
   Container,
   Stack,
@@ -12,12 +15,14 @@ import {
 import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
 import {CgGym} from 'react-icons/cg'
 
+const logoSrc = colorMode === 'light' ? './fitterk-white-logo.png' : './fitterk-dark-logo.png'
 const Logo = (props) => {
   return (
     <>
-    <Text fontSize={"4xl"}>
-    <CgGym/>
-    </Text>
+    <Avatar size={"md"}
+      src={logoSrc}
+      alt="FittErk Logo"
+    />
     </>
   )
 }
@@ -49,17 +54,20 @@ export default function Footer() {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}>
-      <Container
+      color={useColorModeValue('gray.700', 'gray.200')}
+      px={"10"}>
+      <Flex
         as={Stack}
         py={"4"}
         direction={{ base: 'column', md: 'row' }}
         spacing={4}
-        justify={{ base: 'space-between', md: 'space-between' }}
+        justify={'space-between'}
         align={{ base: 'center', md: 'center' }}>
         <Logo />
-        <Text flex={1}>© Made by Erkam Kiris. All rights reserved</Text>
-        <Stack direction={'row'} spacing={6}>
+        <Flex justifyContent="center">
+          <Text fontSize={"xl"}>© Made by Erkam Kiris. All rights reserved</Text>
+        </Flex>
+        <Stack direction={'row'} spacing={10}>
           <SocialButton label={'Twitter'} href={'https://twitter.com/erkamkiris'}>
             <FaTwitter />
           </SocialButton>
@@ -70,7 +78,7 @@ export default function Footer() {
             <FaInstagram />
           </SocialButton>
         </Stack>
-      </Container>
+      </Flex>
     </Box>
-  )
+  );
 }

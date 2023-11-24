@@ -26,7 +26,7 @@ const TestimonialContent = (props) => {
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       boxShadow={'lg'}
-      p={8}
+      py={16}
       rounded={'xl'}
       align={'center'}
       pos={'relative'}
@@ -94,9 +94,12 @@ const TestimonialAvatar = ({
 
 export default function Testimonials() {
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.700')}
-    borderRadius="xl">
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
+    <Box 
+    bg={useColorModeValue('gray.100', 'gray.700')}
+    borderRadius="xl"
+    margin={"12"}>
+      <Container maxW={'7xl'} 
+      py={"16"} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
           <Heading>Our Clients Speak</Heading>
           <Text>We have been working with clients around the world</Text>

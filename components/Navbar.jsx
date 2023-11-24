@@ -4,6 +4,7 @@ import {
   Box,
   Flex,
   Avatar,
+  colorMode,
   Text,
   Button,
   Menu,
@@ -48,6 +49,7 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user, googleSignIn, logOut } = useAuth()
   const [loading, setLoading] = useState(true);
+  const logoSrc = colorMode === 'light' ? './fitterk-white-logo.png' : './fitterk-dark-logo.png'
 
 
   const handleSignIn = async () => {
@@ -88,7 +90,10 @@ export default function Navbar() {
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                 <Text style={{ fontSize: "2rem" }}>
-                    <CgGym/>
+                    <Avatar 
+                    size={'lg'}
+                    src={logoSrc}
+                    />
                 </Text>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
@@ -102,7 +107,7 @@ export default function Navbar() {
               display={{ base: 'inline-flex', md: 'inline-flex' }}
               fontSize={'md'}
               fontWeight={600}
-              color={'white'}
+              color={'gray.100'}
               bg={'blue.400'}
               _hover={{
                 bg: 'blue.500',
