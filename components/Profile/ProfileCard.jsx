@@ -44,8 +44,7 @@ import {
             </Box>
           ) : user ? (
             <Box
-              maxH={"500px"}
-              maxW={'300px'}
+              maxW={'420px'}
               w={'100%'}
               bg={colorLight}
               boxShadow={'2xl'}
@@ -76,11 +75,9 @@ import {
                     </Heading>
                     <Text color={'gray.500'}>Gym beast</Text>
                   </Stack>
-                    {/* Button that opens Modal for Main */}
                   <Main
                   setBodyPart={setSelectedBodyPart}
                   setAddedExercise={setAddedExercise}   
-                // Pass the openModal function to the modal component
                   />   
                   <WorkoutHistoryModal 
                   />

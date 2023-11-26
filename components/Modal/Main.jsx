@@ -328,6 +328,7 @@ const Main = ({ setBodyPart }) => {
                 bg={colorDark}
                 color={'white'}
                 rounded={'md'}
+                width={{ base: "250px", md: "250px" }}
                 p={"2"}
                 m={'1'}
                 >
@@ -412,7 +413,7 @@ const Main = ({ setBodyPart }) => {
             <Button 
             colorScheme="blue" 
             mr={3}  
-            width={{ base: "200px", md: "200px" }}
+            width={{ base: "200px", xmd: "200px" }}
             onClick={() => setActiveStep(4)}>
               Workout Process
             </Button>
@@ -421,12 +422,11 @@ const Main = ({ setBodyPart }) => {
               <Button 
               colorScheme="blue" 
               mr={3}  
-              width={{ base: "300px", md: "230px" }}  
-
+              minW={"250px"} 
               onClick={() => {
                 setActiveStep(1);
               }}>
-                  <HiPlus /> &nbsp; Add Another Exercise
+                  Add Another Exercise
               </Button>
             )}
             {activeStep === 4 && (
