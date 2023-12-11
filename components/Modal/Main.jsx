@@ -34,6 +34,7 @@ import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from '@/firebase';
 import { useAuth } from '@/app/context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
+import { FaPlus } from 'react-icons/fa';
 
 
 const Main = ({ setBodyPart }) => {
@@ -393,46 +394,48 @@ const Main = ({ setBodyPart }) => {
             )}
           {activeStep === 2 && bodyPartSelected && (
             <Button
-            textAlign={"center"}
-            aria-label="Create Exercise"
-            onClick={() => {
-              const newExerciseName = prompt("Enter the name of the new exercise"); 
-              if (newExerciseName) {
-                SelectExercise(newExerciseName);
-              }
-            }}
-            colorScheme="blue" 
-            mr={3}  
-            fontSize={"md"}
-            width={{ base: "250px", md: "200px" }}
+              textAlign={"center"}
+              aria-label="Create Exercise"
+              onClick={() => {
+                const newExerciseName = prompt("Enter the name of the new exercise"); 
+                if (newExerciseName) {
+                  SelectExercise(newExerciseName);
+                }
+              }}
+              colorScheme="blue" 
+              mr={3}  
+              fontSize={"md"}
+              width={{ base: "350px", md: "350px" }}
+              leftIcon={<FaPlus />}
             >
-           Add Different Exercise
+            Different Exercise
           </Button>
           )}
           {activeStep < 4 && exercisesAdded.length > 0 && (
             <Button 
             colorScheme="blue" 
             mr={3}  
-            width={{ base: "200px", xmd: "200px" }}
+            width={{ base: "150px", md: "250px" }}
             onClick={() => setActiveStep(4)}>
-              Workout Process
+             Process
             </Button>
           )}
             {activeStep === 4 && (
               <Button 
               colorScheme="blue" 
               mr={3}  
-              minW={"250px"} 
+              minW={"200px"} 
               onClick={() => {
                 setActiveStep(1);
               }}>
-                  Add Another Exercise
+                  Add More Exercise
               </Button>
             )}
             {activeStep === 4 && (
               <Button 
               colorScheme="blue" 
               mr={3}  
+              minW={"200px"} 
               width={{ base: "200px", md: "200px" }}
               onClick={async () => {
                 const docRef = doc(db, "workouts", user.displayName);
@@ -467,7 +470,8 @@ const Main = ({ setBodyPart }) => {
             )}
              {activeStep === 5 && (
               <Button 
-              width={{ base: "full", md: "200px" }}
+              minW={"200px"} 
+              width={{ base: "200px", md: "200px" }}
               colorScheme="blue" 
               mr={3}  
               onClick={() => {
@@ -480,6 +484,8 @@ const Main = ({ setBodyPart }) => {
               <Button 
               colorScheme="blue" 
               mr={3}  
+              minW={"200px"} 
+              width={{ base: "200px", md: "200px" }}
               onClick={() => {
                 setAddedExercise(prevExercises => {
                   const updatedExercises = prevExercises.filter(exercise => exercise.id !== exerciseToEdit.id);
