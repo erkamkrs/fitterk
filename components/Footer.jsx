@@ -4,7 +4,7 @@ import {
   Avatar,
   Box,
   Flex,
-  colorMode,
+  useColorMode,
   chakra,
   Container,
   Stack,
@@ -15,8 +15,10 @@ import {
 import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
 import {CgGym} from 'react-icons/cg'
 
-const logoSrc = colorMode === 'light' ? './fitterk-white-logo.png' : './fitterk-dark-logo.png'
 const Logo = (props) => {
+  const { colorMode } = useColorMode();
+  const logoSrc = colorMode === 'light' ? './fitterk-white-logo.png' : './fitterk-dark-logo.png';
+
   return (
     <>
     <Avatar size={"md"}

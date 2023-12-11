@@ -19,30 +19,11 @@ import {
   Center,
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon} from '@chakra-ui/icons'
-import {CgGym} from 'react-icons/cg'
 import {FcGoogle} from "react-icons/fc"
 import { useAuth } from '@/app/context/AuthContext'
 import React, { useState, useEffect } from "react";
 
 
-const NavLink = (props) => {
-  const { children } = props
-
-  return (
-    <Box
-      as="a"
-      px={2}
-      py={1}
-      rounded={'md'}
-      _hover={{
-        textDecoration: 'none',
-        bg: useColorModeValue('gray.200', 'gray.700'),
-      }}
-      href={'#'}>
-      {children}
-    </Box>
-  )
-}
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()

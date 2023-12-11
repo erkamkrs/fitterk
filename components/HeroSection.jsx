@@ -99,12 +99,12 @@ export default function HeroSection() {
         </Stack>
       </Flex>
       {useBreakpointValue({ base: null, md: 
-      <Flex pt={{ base: '8', md: '16', lg: '32' }} flex={1}>
+      <Flex pt={{ base: '8', md: '16', lg: '24' }} flex={1}>
       <Image
-        alt={'Squat Image'}
+        alt={'logo'}
         src={logoSrc}
-        width={{ base: 'xl', md: 'lg', lg: '4xl' }}
-        height={{ base: 'xl', md: 'lg', lg: '3xl' }}
+        width={{ base: 'xl', md: 'lg', lg: '2xl' }}
+        height={{ base: 'xl', md: 'lg', lg: '2xl' }}
       />
     </Flex> })}
     </Stack>
