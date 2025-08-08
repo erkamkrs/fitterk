@@ -5,6 +5,8 @@
 
 Fitterk is a fitness app designed for resistance training. It allows users to create, track, and update their daily workout routines. The app provides a user-friendly interface to select exercises based on specific body parts, add sets and repetitions, and track progress over time.
 
+**Live Demo:** [https://fitterk.vercel.app/](https://fitterk.vercel.app/)
+
 ## Features
 
 - **User Authentication:** Sign in with Google or Facebook to create a profile and start tracking your workouts.
@@ -51,7 +53,7 @@ Fitterk is a fitness app designed for resistance training. It allows users to cr
 
 ## Usage
 
-![Alt text](public/home-page.png)
+![Alt text](public/home.png)
 
 1. Click to "Get Started" or "Google Sign-in" button to Sign-in using Google Account 
 
