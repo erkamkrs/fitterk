@@ -53,15 +53,15 @@ Fitterk is a fitness app designed for resistance training. It allows users to cr
 
 ![Alt text](public/home-page.png)
 
-1. Sign-in using Google Account 
+1. Click to "Get Started" or "Google Sign-in" button to Sign-in using Google Account 
 
-![Alt text](public/start-workout.png)
+![Alt text](public/signin.png)
 
 2. Click on "Start a Workout" to begin creating your workout routine.
+![Alt text](public/modal-1.png)
+
 
 3. Follow the step-by-step process to select the body part, choose an exercise, add sets and reps, and review your exercises.
-
-![Alt text](public/modal-1.png)
 
 ![Alt text](public/modal-2.png)
 
@@ -71,15 +71,17 @@ Fitterk is a fitness app designed for resistance training. It allows users to cr
 
 ![Alt text](public/modal-5.png)
 
+![Alt text](public/modal-6.png)
+
+![Alt text](public/modal-7.png)
+
 4. Finish the workout by clicking "Finish Workout." The app will store your workout data in Firebase Firestore.
 
 5. View and manage your workout history by navigating to past workouts.
-![Alt text](public/workout-history.png)
 
-![Alt text](public/select-date.png)
+![Alt text](public/modal-6.png)
 
-![Alt text](public/workout-details.png)
-
+![Alt text](public/modal-7.png)
 ## Contributing
 
 Contributions to the Fitterk Workout App are welcome! If you find any bugs or have suggestions for improvements, feel free to submit an issue or pull request.
